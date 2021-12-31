@@ -1,8 +1,9 @@
-export function ItemListContainer(props){
-    const {numberOfItems} =props
-    return(
-    <div>
-        {numberOfItems}
-    </div>
-    )
+import { ItemCount } from './ItemCount';
+
+export function ItemsListContainer(){
+    return <ItemCount stock={6} initial={1}/>
+
+    
+
+
 }
