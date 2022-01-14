@@ -1,6 +1,7 @@
 import {Item} from './Item'
 
 export function ItemList({products}){
+    
     return(
         <div>
             {products.map(product =>{

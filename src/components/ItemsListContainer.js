@@ -12,16 +12,19 @@ const myPromise = new Promise((resolve, reject) =>{
             {
                 id: '1',
                 name: 'Samsung Galazy z fold 3',
+                img: "https://images.samsung.com/ar/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg",
                 precio: 7000
             },
             {
                 id: '2',
                 name:'Samsung Galaxy Z flip 3',
+                img: "https://m.media-amazon.com/images/I/716P9qOKcUL._AC_SL1500_.jpg",
                 precio: 4000
             },
             {
                 id: '3',
                 name: 'Samsung Galaxy s21 ultra',
+                img:"https://falabella.scene7.com/is/image/FalabellaPE/17892255_1?wid=800&hei=800&qlt=70",
                 precio: 5000
             }]
 
