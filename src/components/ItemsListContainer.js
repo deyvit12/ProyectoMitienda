@@ -13,7 +13,8 @@ const myPromise = new Promise((resolve, reject) =>{
                 id: '1',
                 name: 'Samsung Galazy z fold 3',
                 img: "https://images.samsung.com/ar/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg",
-                precio: 7000
+                precio: 7000,
+                detail: 155
             },
             {
                 id: '2',

@@ -4,45 +4,21 @@ import React, {useEffect, useState} from 'react';
 
 function fetchItem(){
     return new Promise((resolve)=>{
-        const detalleProducto =[
-            {
-                id: '1',
-                name: 'Samsung Galazy z fold 3',
-                precio: 7000,
-                caracteristica: "lorem  ajfasfasf",
-                envio: "Gratis"
-            },
-            {
-                id: '2',
-                name:'Samsung Galaxy Z flip 3',
-                precio: 4000,
-                caracteristica: "lorem  ajfasfasf",
-                envio: "Gratis"
-            },
-            {
-                id: '3',
-                name: 'Samsung Galaxy s21 ultra',
-                precio: 5000,
-                caracteristica: "lorem  ajfasfasf",
-                envio: "Gratis"
-            }]
-        resolve(detalleProducto)
-
-    },2000)
+       resolve({ItemDetail})
+    })
 }
 
 export function ItemDetailContainer(){
-    const [detalleProducto, setItem] = useState(null)
+    const [item, setItem] = React.useState(null)
     const [mostrar, setMostrar] = useState(false)
 
-    useEffect(() =>{
-        async function populateState(){
+    React.useEffect(() =>{
+        async function listaDetalles(){
             const data = await fetchItem()
-
             setItem(data)
         }
 
-        populateState()
+        listaDetalles()
     }, [])
 
     
@@ -55,7 +31,7 @@ export function ItemDetailContainer(){
                 mostrar
                     ?
                     <div>   
-                        <ItemDetail detalleProducto={detalleProducto}/>
+                        <ItemDetail item={item} />
                     </div>
                     :null
             }
