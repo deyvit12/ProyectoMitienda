@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { ItemsListContainer } from './components';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
@@ -7,16 +7,23 @@ import { ItemDetailContainer } from './components/ItemDetailContainer';
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <BrowserRouter>              
       <NavBar/>
-      <ItemsListContainer/>
-        <header className="">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        </header>
-    </div>
-  
-
-    
+        <Switch>
+            <Route exact path='/'>
+            <div className="App">
+              <ItemsListContainer/>
+            </div>
+            </Route>
+            <Route path="/producto/:id">
+            <div className="App">
+              <ItemsListContainer/>
+            </div>
+            </Route>
+          </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 

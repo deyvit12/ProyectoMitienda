@@ -1,10 +1,10 @@
 import { ItemCount } from './ItemCount';
 import {ItemList} from './ItemList';
 import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const myPromise = new Promise((resolve, reject) =>{
-
     let exito = true
     if (exito){
          setTimeout(() => {
@@ -14,7 +14,7 @@ const myPromise = new Promise((resolve, reject) =>{
                 name: 'Samsung Galazy z fold 3',
                 img: "https://images.samsung.com/ar/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg",
                 precio: 7000,
-                detail: 155
+                
             },
             {
                 id: '2',
@@ -39,6 +39,8 @@ const myPromise = new Promise((resolve, reject) =>{
 })
 
 export function ItemsListContainer(){
+    const {id} = useParams();
+    console.log(id)
     const [products, setProducts] = useState(null)
 
     useEffect(() => {
