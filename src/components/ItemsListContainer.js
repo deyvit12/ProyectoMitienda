@@ -1,4 +1,4 @@
-import { ItemCount } from './ItemCount';
+
 import {ItemList} from './ItemList';
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
@@ -59,7 +59,6 @@ export function ItemsListContainer(){
 
     return (
         <div>
-            <ItemCount stock={6} initial={1}/>
             <ItemList products={products}/>
         </div>
     )

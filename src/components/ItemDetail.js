@@ -1,4 +1,4 @@
-
+import { ItemCount } from "./ItemCount"
 export function ItemDetail({ItemsD}){
     return ( 
         <div>
@@ -17,8 +17,9 @@ export function ItemDetail({ItemsD}){
                     Con una batería de 4400 mAh y carga rápida, el Samsung Galaxy Z Fold 3, nos dará la autonomía necesaria para poder ejecutar aplicaciones y ver videos.</p>
        
             </div>
+            <ItemCount onAdd={() => {}} stock={6} initial={1}/>
             </div>
-
+        
         </div>
     )
 
