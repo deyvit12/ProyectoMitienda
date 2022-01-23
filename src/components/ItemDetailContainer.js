@@ -1,40 +1,30 @@
-import { ItemDetail } from "./ItemDetail";
-import React, {useEffect, useState} from 'react';
+import {ItemDetail}  from "./ItemDetail";
+import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+import  productos from "../utils/products.json";
 
 
-function fetchItem(){
-    return new Promise((resolve)=>{
-       resolve({ItemDetail})
-    })
-}
+export const ItemDetailContainer =() =>{
 
-export function ItemDetailContainer(){
-    const [item, setItem] = React.useState(null)
-    const [mostrar, setMostrar] = useState(false)
+    const { id } = useParams();
+    const [ item, setItem] = useState([]);
 
-    React.useEffect(() =>{
-        async function listaDetalles(){
-            const data = await fetchItem()
-            setItem(data)
-        }
+    useEffect(() => {
+        setTimeout(()=> {
+            setItem(
+                productos.filter(item => item.id === parseInt(id))
+            )
+        }, 2000);
+    },[]);
 
-        listaDetalles()
-    }, [])
+    if (item.length === 0) {
+        return <p>Cargando Productos....</p>;
+    } else
+    {
+        return (
+            <ItemDetail item={item}/>
+        )
+    }
 
-    
+ }
 
-    return (
-        <div>
-            <button className="btn btn-primary"  href="#"  
-            onClick={() => setMostrar(!mostrar)}> Comprar </button>
-            {
-                mostrar
-                    ?
-                    <div>   
-                        <ItemDetail item={item} />
-                    </div>
-                    :null
-            }
-        </div>
-    )
-}

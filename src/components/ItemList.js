@@ -1,14 +1,19 @@
-import {Item} from './Item'
+import  {Item}  from "./Item";
 
 
-export function ItemList({products}){
-    
+
+export const ItemList = ({param}) =>{
     return(
-        <div>
-            {products.map(product =>{
-                return <Item key={product.id} product={product}/>
-            })}
-
-        </div>   
+        <>
+            { param && param.length > 0 ?
+            param.map(item => {
+                return <div key={item.id}>
+                    <Item item={item}/>
+                </div>
+            })
+              :"Error reciving Item List parameters..."}
+        </>
+        
     )
 }
+

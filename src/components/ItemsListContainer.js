@@ -1,67 +1,37 @@
-
+import React, {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
 import {ItemList} from './ItemList';
-import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import productos  from "../utils/products.json"
 
 
-const myPromise = new Promise((resolve, reject) =>{
-    let exito = true
-    if (exito){
-         setTimeout(() => {
-            const products=[
-            {
-                id: '1',
-                name: 'Samsung Galazy z fold 3',
-                img: "https://images.samsung.com/ar/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg",
-                precio: 7000,
-                
-            },
-            {
-                id: '2',
-                name:'Samsung Galaxy Z flip 3',
-                img: "https://m.media-amazon.com/images/I/716P9qOKcUL._AC_SL1500_.jpg",
-                precio: 4000
-            },
-            {
-                id: '3',
-                name: 'Samsung Galaxy s21 ultra',
-                img:"https://falabella.scene7.com/is/image/FalabellaPE/17892255_1?wid=800&hei=800&qlt=70",
-                precio: 5000
-            }]
 
-            resolve(products)
-        },3000)
-    }
-    else {
-        reject("Error")
-    }
+export const ItemListContainer = (param) => {
 
-})
 
-export function ItemsListContainer(){
-    const {id} = useParams();
-    console.log(id)
-    const [products, setProducts] = useState(null)
+    const { categoryId } = useParams()
+    const [items, setItems] = useState([])
 
-    useEffect(() => {
-        myPromise
-        .then(res => setProducts(res))
+        useEffect(() =>{
+            setTimeout(()=>{
+                if (categoryId) {
+                    const productosFiltrados = productos.filter(producto => producto.category === categoryId)
+                    console.log(productosFiltrados)
+                    setItems(productosFiltrados)
+                } else{
+                    setItems(productos)
+                }
 
-            
-        
-    },[])
+            }, 2000)
+        }, [categoryId]);
 
-    if(products == null) {
-        return(
-            <div>Loading....</div>
-        )
-    }
-
-    return (
-        <div>
-            <ItemList products={products}/>
-        </div>
-    )
-    
-
+        if (items.length === 0){
+            return <p> Cargando Productos... :)</p>;
+        } else {
+                return(
+                <>
+                    <ItemList param={items}/>
+                </>
+                )
+            }
 }
+
