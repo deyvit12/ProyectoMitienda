@@ -11,7 +11,7 @@ export const ItemList = ({param}) =>{
                     <Item item={item}/>
                 </div>
             })
-              :"Error reciving Item List parameters..."}
+              :"Error ..."}
         </>
         
     )

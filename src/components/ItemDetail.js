@@ -25,7 +25,7 @@ export const ItemDetail = ({ item })=> {
                 </div>
 
                 <div>
-                    <Button variant="contained" size ="small" disabledElevation> Añadir al Carrito </Button>
+                    {/* <Button variant="contained" size ="small" disabledElevation> Añadir al Carrito </Button> */}
 
                 </div>
 
