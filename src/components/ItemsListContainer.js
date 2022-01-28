@@ -24,7 +24,7 @@ export const ItemListContainer = (param) => {
             }, 2000)
         }, [categoryId]);
 
-        if (items.length === 0){
+        if (items.length === 0) {
             return <p> Cargando Productos... :)</p>;
         } else {
                 return(
