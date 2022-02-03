@@ -1,46 +1,60 @@
-import { ItemCount } from "./ItemCount"
-import {Link} from 'react-router-dom'
-import {Button} from "@material-ui/core"
+import { ItemCount } from './ItemCount'
+import { useCart } from '../hooks/useCart'
 
-export const ItemDetail = ({ item })=> {
+export function ItemDetail({ product }) {
+  const cart = useCart()
 
-    
+  const cartItem = cart.getItem(product.id)
 
-    const {id, category, name, img, precio, description } = item[0];
-    
-    return(
-        <div  className="card card-body  " key={id} id={id}>
-            <div className="card-body">
-                <h2 className="card-title">{category} - {name}</h2>
-                <img class="card-img-top w-10 rounded mx-auto d-block" src={img} alt="..." />
-                <div>
-                    <ul>
-                        <li>{description}</li>
-                    </ul>
+  function onAddToCart(quantity) {
+    cart.addItem({ ...product, quantity })
+  }
 
-                    <h3>Precio: {precio}</h3>
-                </div>
-                <div>
-                    <ItemCount qty={1} stk={10}/>
-                </div>
-
-                <div>
-                    {/* <Button variant="contained" size ="small" disabledElevation> Añadir al Carrito </Button> */}
-
-                </div>
-
-                <ul>
-                    <li>
-                        <Link to={'/'}>
-                           <button className="btn btn-info"> Volver a Inicio</button>
-                            
-                            </Link>
-                    </li>
-                </ul>
-
-            </div>
-            
+  return (
+    <div className="container">
+      <div className="row pb-5 ">
+          
+        <div className="  pt-5 mt-5">
+          <div className=" fw-bolder fs-1">
+            {product.title}
+          </div>
         </div>
+        <div className="col">
+          <img
+            className="w-100 shadow p-3 mb-5 bg-body rounded"
+            src={product.pictureUrl}
+            alt={product.title}
+          />
+        </div>
+        <div className="col flex text-center">
+          <div className="shadow-sm p-3 mb-5 bg-body rounded ">
+          <div className=" fs-1 p-2 text-primary position-relative badge " >
+          {product.price.currencyCode} {product.price.value}  <span class="position-absolute fs-6 top-0 start-100 translate-middle badge rounded-pill bg-danger">oferta <span class="visually-hidden">unread messages</span></span>
 
-    )
+            
+          </div>
+          <div className="badge text-danger shadow  mb-5 bg-body rounded m-3">
+           {product.stock} unidades en Stock
+        </div>
+            <ItemCount
+              initialValue={cartItem?.quantity}
+              maxValue={product.stock}
+              onAdd={onAddToCart}
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div className=" pt-3 flex ">
+        <div className="fs-2">{product.title} - Descripción</div>
+        <div
+          className="border-top fst-italic"
+          dangerouslySetInnerHTML={{ __html: product.description }}
+        />
+
+      </div>
+    </div>
+  )
 }
+
+

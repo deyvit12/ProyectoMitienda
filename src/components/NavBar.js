@@ -1,56 +1,59 @@
-import React from "react";
-import { CartWidget } from "./CartWidget";
-import {NavLink, Link} from 'react-router-dom'
-import { useState} from 'react'
-import { useCart } from "../hooks/useCart";
+import { useState } from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import { useCart } from '../hooks/useCart'
+import { CartWidget } from './CartWidget'
+
+const categories = [
+  { id: 'all', name: 'INICIO' },
+  { id: 'Celulares', name: 'CELULARES' },
+  { id: 'Laptop', name: 'LAPTOPS' },
+  
+]
+
+export function NavBar() {
+  const cart = useCart()
+
+//   const [isMenuVisible, setIsMenuVisible] = useState(false)
+
+  return(
+    <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+            <div className="container-fluid  ">
+                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                         <span className="navbar-toggler-icon"></span>
+                    </button>
+                            <div className="collapse navbar-collapse   justify-content-end  " id="navbarNavDropdown">
+                              <ul className="navbar-nav">
 
 
-const NavBar = () =>{
-    const cart = useCart()
-    const listItem = ["Celulares","Laptop"];
-    return(
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container-fluid">
-                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                             <span className="navbar-toggler-icon"></span>
-                        </button>
-                                <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                                  <ul className="navbar-nav">
-                                       <li className="nav-item">
-                                           <Link to="/">
-                                                <a class="nav-link " aria-current="page" href="#">Home</a>
-                                                </Link>
-                                       </li>
-
-                                        <div className="">
-                                                    <ul className=" navbar-nav">
-                                                    {listItem.map((item) => (
-                                                        <li key={item}>
+                                    <li className="nav-item">
+                                                <ul className=" navbar-nav">
+                                                {categories.map((category) => {
+                                                        return (
                                                         <NavLink
+                                                            key={category.name}
+                                                            exact
+                                                            activeClassName="active navbar-brand"
                                                             className="nav-link"
-                                                            activeClassName="active"
-                                                            to={`/category/${item}`}
+                                                            to={category.id === 'all' ? '/' : `/c/${category.id}`}
                                                         >
-                                                            {item}
+                                                            {category.name}
                                                         </NavLink>
-                                                        </li>
-                                                    ))}
-                                                    </ul>
-                                                </div>
-                                                <div className="flex h-16 md:ml-8">
-                                                    <Link to="/cart">
-                                                         <CartWidget numOfItems={cart.length} />
-                                                    </Link>
-                                                </div>
-                                        
-                                    </ul>
-                                </div>
-                         </div>
-                </nav>
+                                                        )
+                                                    })}
+                                                </ul>
+                                    </li>
+                                     <li className="nav-item ">
+                                                <Link to="/cart">
+                                                     <CartWidget numOfItems={cart.length} />
+                                                </Link>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                     </div>
+            </nav>
 
-        </div>
-    )
-} 
-
-export default NavBar
+    </div>
+)
+}

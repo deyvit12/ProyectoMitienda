@@ -1,37 +1,51 @@
-import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import {ItemList} from './ItemList';
-import productos  from "../utils/products.json"
+import { useState, useEffect } from 'react'
+import { ItemList } from './ItemList'
+import { Spinner } from './Spinner'
 
+import mockedProducts from '../productosData/products.json'
 
+async function getProducts(query) {
+  const productsPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      let resolvedProduct = mockedProducts
 
-export const ItemListContainer = (param) => {
+      if (query?.categoryId) {
+        resolvedProduct = mockedProducts.filter(
+          (product) => product.categoryId === query.categoryId
+        )
+      }
 
+      resolve(resolvedProduct)
+    }, 2000)
+  })
 
-    const { categoryId } = useParams()
-    const [items, setItems] = useState([])
+  const products = await productsPromise
 
-        useEffect(() =>{
-            setTimeout(()=>{
-                if (categoryId) {
-                    const productosFiltrados = productos.filter(producto => producto.category === categoryId)
-                    console.log(productosFiltrados)
-                    setItems(productosFiltrados)
-                } else{
-                    setItems(productos)
-                }
+  return products
+}
 
-            }, 2000)
-        }, [categoryId]);
+export function ItemListContainer({ query }) {
+  const [isLoading, setIsLoading] = useState(true)
 
-        if (items.length === 0) {
-            return <p> Cargando Productos... :)</p>;
-        } else {
-                return(
-                <>
-                    <ItemList param={items}/>
-                </>
-                )
-            }
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    async function fn() {
+      setIsLoading(true)
+
+      try {
+        const products = await getProducts(query)
+        setProducts(products)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fn()
+  }, [query])
+
+  return isLoading ? <Spinner centered /> : <ItemList products={products} />
 }
 

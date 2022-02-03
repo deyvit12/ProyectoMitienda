@@ -1,30 +1,45 @@
-import {ItemDetail}  from "./ItemDetail";
-import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import  productos from "../utils/products.json";
+import { useEffect, useState } from 'react'
+import { ItemDetail } from './ItemDetail'
 
+import mockedProducts from '../productosData/products.json'
+import { Spinner } from './Spinner'
 
-export const ItemDetailContainer =() =>{
+async function getProduct(productId) {
+  const productPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      const product = mockedProducts.find((product) => product.id === productId)
+      resolve(product)
+    }, 2000)
+  })
 
-    const { id } = useParams();
-    const [ item, setItem] = useState([]);
+  const product = await productPromise
 
-    useEffect(() => {
-        setTimeout(()=> {
-            setItem(
-                productos.filter(item => item.id === parseInt(id))
-            )
-        }, 2000);
-    },[]);
+  return product
+}
 
-    if (item.length === 0) {
-        return <p>Cargando Productos....</p>;
-    } else
-    {
-        return (
-            <ItemDetail item={item}/>
-        )
+export function ItemDetailContainer({ productId }) {
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [product, setProduct] = useState()
+
+  useEffect(() => {
+    async function fn() {
+      setIsLoading(true)
+
+      try {
+        const product = await getProduct(productId)
+        setProduct(product)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
- }
+    fn()
+  }, [productId])
+
+  return isLoading ? <Spinner centered /> : <ItemDetail product={product} />
+}
+
 

@@ -1,11 +1,13 @@
+import cart from '../aseets/cart.png';
 export function CartWidget({ numOfItems }) {
     return (
-        <div className=".cart-Widget">
-        <a className="navbar-brand" >
-            <img src="https://image.flaticon.com/icons/png/512/107/107831.png" alt="LogoNav" className="w-10 d-flex justify-content-end">
+        <div className="ms-5 me-0 container-fluid ">
+        <a className=" " >
+        <span className="ml-4 badge bg-secondary " >{numOfItems}</span>
+            <img src={cart} alt="LogoNav" className="  "  width="60">
+                
             </img>
         </a>
-        <span className="ml-4">{numOfItems}</span>
         </div>
     )
 }

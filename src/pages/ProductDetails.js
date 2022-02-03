@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { ItemDetailContainer } from '../components'
 
 export function ProductDetailsPage() {
-  const { itemId } = useParams()
+  const { productId } = useParams()
 
-  return <ItemDetailContainer itemId={itemId} />
+  return <ItemDetailContainer productId={productId} />
 }

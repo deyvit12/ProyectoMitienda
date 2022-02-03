@@ -1,37 +1,47 @@
-import {Link} from 'react-router-dom'
+import { classNames } from '../utils/classNames';
 
-export function ItemImage({ item }) {
+
+
+export function ItemImage({ product }) {
   return (
-    <div className="absolute inset-0 transform transition hover:scale-125 ease-in-out">
+    <div className="card-img-top ">
       <img
-        src={item.img}
-        alt={item.name}
-        className="h-full w-full object-cover"
+        src={product.pictureUrl}
+        alt={product.title}
+        className=" card-img-top"
       />
     </div>
   )
 }
 
-export const Item = ({ item }) => {
+export function Item({ product, className }) {
+  return (
+    <div 
+      className={classNames(
+        className,
+        'card  mb-3  text-dark bg-light  " '
+      )}
+    >
+     
+      <div className="card-header mt-5   ">
+        <div className="  fs-5 p-3 text-decoration-none fw-bolder badge text-body">
+          {product.title}
+        </div>
+      </div>
+      <ItemImage product={product} />
+      <div className="absolute bottom-0 right-0 ">
+        <div className="badge bg-primary text-wrap mx-4">
+        {product.price.currencyCode} {product.price.value} 
+          </div>
+          <div className="btn btn-sm btn-outline-secondary m-3">
+            Stock: {product.stock}
+          </div>
 
-  return(
-        <div className="card card-body" key={item.id} id={item.id}  >
-            <h2>{item.name}</h2>
-          <img src={item.img} class="card-img-top w-10 rounded mx-auto d-block" alt=""/>
-          <div className="card-body">
-          <p className="card-text">Precio S/ {item.precio}</p>
-          <h3>Stock {item.stock}</h3>
-
-          <a>
-            <Link to={`/itemDetail/${item.id}`}>
-              <button className=' btn btn-danger'> Ver Mas Detalles</button>
-              </Link>
-          </a>
-   
-        
-    </div>
-  </div>
+      </div>
     
-    )
+    </div>
+  )
 }
+
+
 
