@@ -24,8 +24,7 @@ export function NavBar() {
                     </button>
                             <div className="collapse navbar-collapse   justify-content-end  " id="navbarNavDropdown">
                               <ul className="navbar-nav">
-
-
+                                  
                                     <li className="nav-item">
                                                 <ul className=" navbar-nav">
                                                 {categories.map((category) => {

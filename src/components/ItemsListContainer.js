@@ -2,26 +2,16 @@ import { useState, useEffect } from 'react'
 import { ItemList } from './ItemList'
 import { Spinner } from './Spinner'
 
-import mockedProducts from '../productosData/products.json'
+import { getAllProducts, getProductsByCategoryId } from '../firebase'
 
-async function getProducts(query) {
-  const productsPromise = new Promise((resolve) => {
-    setTimeout(() => {
-      let resolvedProduct = mockedProducts
+function getProducts (query){
+  const categoryId =query?.categoryId
 
-      if (query?.categoryId) {
-        resolvedProduct = mockedProducts.filter(
-          (product) => product.categoryId === query.categoryId
-        )
-      }
-
-      resolve(resolvedProduct)
-    }, 2000)
-  })
-
-  const products = await productsPromise
-
-  return products
+  if(categoryId){
+    return getProductsByCategoryId(categoryId)
+  } else {
+    return getAllProducts()
+  }
 }
 
 export function ItemListContainer({ query }) {

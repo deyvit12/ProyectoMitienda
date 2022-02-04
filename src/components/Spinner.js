@@ -10,7 +10,7 @@ export function Spinner({ centered, className }) {
         centered && 'flex items-center justify-center'
       )}
     >
-<div class="spinner-border mt-5 " role="status">
+<div class="spinner-border mt-5 mb-5" role="status">
   <span class="visually-hidden mt-5">Loading...</span>
 </div>
     </div>

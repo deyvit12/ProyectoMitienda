@@ -6,7 +6,7 @@ import { useCart } from '../hooks/useCart'
 
 function CartItem({ cartItem, position, onDelete }) {
   return (
-    <div className={`container row mt-5 ${position % 2 !== 0 ? 'bg-gray-100' : ''}`}>
+    <div className={`container row mt-5 border ${position % 2 !== 0 ? 'bg-gray-100' : ''}`}>
       <Link className='col' to={`/p/${cartItem.id}`}>
         <div className="w-25">
           <ItemImage product={cartItem} />
@@ -19,7 +19,7 @@ function CartItem({ cartItem, position, onDelete }) {
           role="button"
           onClick={onDelete}
         >
-          <img src='https://static.vecteezy.com/system/resources/previews/000/377/441/non_2x/delete-vector-icon.jpg' className='w-25 c'></img>
+          <img src='https://static.vecteezy.com/system/resources/previews/000/377/441/non_2x/delete-vector-icon.jpg' className='w-25'></img>
         </div>
         <div className="text-xl font-semibold mt-1 text-indigo-600">
         {cartItem.price.currencyCode} {cartItem.price.value} 
