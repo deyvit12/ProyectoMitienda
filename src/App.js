@@ -14,6 +14,7 @@ export default function App() {
           <NavBar />
           <div className="mt-28 pb-6 mx-auto container">
             <Route exact path="/">
+              <h1  className='text-center mt-5 pt-5 bg-info shadow-lg p-3 mb-5 bg-body rounded'> Deyvit Store</h1>
               <HomePage />
             </Route>
             <Route path="/p/:productId">

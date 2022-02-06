@@ -13,15 +13,15 @@ export function ItemCount({ initialValue, minValue = 1, maxValue, onAdd }) {
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex items-center bg-gray-100">
+    <div className="flex flex-col ">
+      <div className="">
         <Button className="btn btn-danger"
           onClick={() => setCount(onDecrement)}
           disabled={count === minValue}
         >
             -
         </Button>
-        <span className="mx-4 text-3xl font-semibold flex-1 text-center select-none">
+        <span className="mx-4   flex-1 text-center select-none">
           {count}
         </span>
         <Button className="btn btn-primary"

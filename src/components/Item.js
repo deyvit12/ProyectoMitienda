@@ -19,11 +19,11 @@ export function Item({ product, className }) {
     <div 
       className={classNames(
         className,
-        'card  mb-3  text-dark bg-light  " '
+        'card  mb-5 mt-5  text-dark bg-light  " '
       )}
     >
      
-      <div className="card-header mt-5   ">
+      <div className="card-header    ">
         <div className="  fs-5 p-3 text-decoration-none fw-bolder badge text-body">
           {product.title}
         </div>

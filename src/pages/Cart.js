@@ -1,32 +1,36 @@
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import { Button } from '../components/Button'
 import { ItemImage } from '../components/Item'
 import { useCart } from '../hooks/useCart'
+import {createOrdenes} from '../firebase'
+import { TextField } from '../components/TextField'
+
 
 function CartItem({ cartItem, position, onDelete }) {
   return (
-    <div className={`container row mt-5 border ${position % 2 !== 0 ? 'bg-gray-100' : ''}`}>
-      <Link className='col' to={`/p/${cartItem.id}`}>
-        <div className="w-25">
+    <div className={`container row mt-5 border ${position % 2 !== 0 ? 'bg-light' : ''}`}>
+      <Link className='col modal-sm'  to={`/p/${cartItem.id}`}>
+        <div className="w-100">
           <ItemImage product={cartItem} />
         </div>
       </Link>
-      <div className="col">
-        <h2 className="font-semibold text-3xl">{cartItem.title}</h2>
+      <div className="col modal-sm">
+        <h2 className="fs-3">{cartItem.title}</h2>
         <div
-          className="absolute right-0 top-0 p-4 bg-red-500 text-gray-100 hover:text-white"
+          className="btn"
           role="button"
           onClick={onDelete}
         >
           <img src='https://static.vecteezy.com/system/resources/previews/000/377/441/non_2x/delete-vector-icon.jpg' className='w-25'></img>
         </div>
-        <div className="text-xl font-semibold mt-1 text-indigo-600">
+        <div className="fs-3">
         {cartItem.price.currencyCode} {cartItem.price.value} 
         </div>
-        <div className="text-2xl font-semibold mt-auto ml-auto">
-          <span className="text-indigo-600">
-           S/  {cartItem.price.value * cartItem.quantity}{' '}
+        <div className="fs-4 border">
+          <span className="border">
+             {cartItem.price.value * cartItem.quantity}{' '}
             {cartItem.price.currencyCode}
           </span>{' '}
           x  {cartItem.quantity} Unidades
@@ -37,20 +41,54 @@ function CartItem({ cartItem, position, onDelete }) {
 }
 
 export function CartPage() {
+  const form = useForm()
+
   const cart = useCart()
 
   const carritoTitleEl = (
-    <h1 className="mb-6 text-4xl font-semibold">Carrito</h1>
+    <h1 className="mb-5 mt-5  pt-5 text-center fs-1">Carrito</h1>
   )
+
+  async function onSubmit(formValues) {
+    try {
+      console.log({ formValues })
+
+      const newOrderData = {
+        buyer: formValues,
+        items: cart.items,
+        total: cart.total.toFixed(2),
+      }
+
+      const newOrderId = await createOrdenes(newOrderData)
+
+      alert(`Gracias por tu compra. OrderID: ${newOrderId}`)
+
+      form.reset()
+
+      cart.clear()
+    } catch (error) {
+      alert(`Algo inesperado ha ocurrido.`)
+
+      console.error(error)
+    }
+  }
+
+
+
 
   if (cart.isEmpty) {
     return (
       <Fragment>
         {carritoTitleEl}
-        <div className="flex flex-col justify-center items-center">
-          <p className="text-3xl">Carrito Vacio</p>
-          <Link to="/">
-            <Button className="mt-8">Seguir comprado</Button>
+        <Link to="/" className='d-flex justify-content-center'>
+        <img className='' src="https://cdn-icons-png.flaticon.com/512/102/102661.png"></img>
+        </Link>
+        <div className=" ">
+         
+          <p className="fs-1 text-center my-5">Carrito Vacio</p>
+          
+          <Link className='d-flex justify-content-center' to="/">
+            <Button className="my-5  text-center btn btn-success  mt-5">Seguir comprado</Button>
           </Link>
         </div>
       </Fragment>
@@ -60,8 +98,8 @@ export function CartPage() {
   return (
     <Fragment>
       {carritoTitleEl}
-      <div className="flex w-full">
-        <div className="flex flex-col w-[60%] overflow-y-auto h-[720px]">
+      <div className="flex ">
+        <div className="flex flex-col  ">
           {cart.items.map((cartItem, index) => {
             return (
               <CartItem
@@ -73,15 +111,85 @@ export function CartPage() {
             )
           })}
         </div>
-        <div className="flex flex-col flex-1 ml-8">
-          <h2 className="mb-8 text-3xl font-semibold">Detalle del precio</h2>
-          <div className=" shadow-lg p-3 mb-5 bg-body rounded ">
+        <div className="col">
+
+
+          <section  className='border'>
+          <h2 className="mb-8  ">Detalle del precio</h2>
+          <div className="  p-3 mb-5  ">
             <span className="flex-1 font-semibold ">Total       </span>
-            <span>S/ {cart.total.toFixed(2)}  </span>
+            <span>S/ {cart.total.toFixed(2)}</span>
           </div>
-          <Button className=" btn btn-primary mt-3" disabled={cart.length === 0}>
-            Finalizar compra
-          </Button>
+          </section>
+
+
+          <section className="border bg-warning my-2">
+            <h2 className="mb-4 text-3xl font-semibold">Completar pedido</h2>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="row g-3 px-3"
+            >
+              
+              <div className='col-md-12'>
+              <label for="formGroupExampleInput" className="form-label">Nombres Completos</label>
+              <TextField
+              className=' p-2  '
+                inputProps={{
+                  placeholder: 'Ingrese su Nombre',
+                  required: true,
+                  ...form.register('name'),
+                }}
+              />
+              </div >
+              <div className='col-md-12'>
+              <label for="inputEmail4" className="form-label">Correo Electronico</label>
+              <TextField
+                inputProps={{
+                  placeholder: 'ejemplo@example.com',
+                  required: true,
+                  ...form.register('email'),
+                }}
+              />
+              </div>
+
+              <div className='col-12'>
+              <label for="inputAddress" className="form-label">Telefono</label>
+
+              <TextField
+                inputProps={{
+                  placeholder: '999999999',
+                  required: true,
+                  ...form.register('phone'),
+                }}
+              />
+              </div>
+
+              <div className='col-12'>
+              <label for="inputAddress" className="form-label">Direccion</label>
+
+              <TextField
+                inputProps={{
+                  placeholder: 'Av.Ejemplo 3232',
+                  required: true,
+                  ...form.register('direction'),
+                }}
+              />
+              </div>
+
+
+
+
+              <Button 
+              className='btn btn-primary col-md-2'
+                disabled={cart.length === 0}
+                isLoading={form.formState.isSubmitting}
+              >
+                Finalizar compra
+              </Button>
+            </form>
+
+
+          </section>
         </div>
       </div>
     </Fragment>
