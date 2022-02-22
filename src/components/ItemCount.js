@@ -1,8 +1,19 @@
 import { useState } from 'react'
 import { Button } from './Button'
+import swal from 'sweetalert'
+
 
 export function ItemCount({ initialValue, minValue = 1, maxValue, onAdd }) {
   const [count, setCount] = useState(initialValue ?? minValue)
+  const mostrarAlert=()=>{
+    swal({
+      title: "Genial...!!!",
+      text: "Se añadio Al Carrito",
+      icon: "success",
+      button: "Aceptar",
+      timer: "4000",
+    });
+  }
 
   function onIncrement(currentCount) {
     return Math.min(maxValue, currentCount + 1)
@@ -14,14 +25,14 @@ export function ItemCount({ initialValue, minValue = 1, maxValue, onAdd }) {
 
   return (
     <div className="flex flex-col ">
-      <div className="">
+      <div>
         <Button className="btn btn-danger"
           onClick={() => setCount(onDecrement)}
           disabled={count === minValue}
         >
             -
         </Button>
-        <span className="mx-4   flex-1 text-center select-none">
+        <span className="mx-4  text-center">
           {count}
         </span>
         <Button className="btn btn-primary"
@@ -31,10 +42,18 @@ export function ItemCount({ initialValue, minValue = 1, maxValue, onAdd }) {
             +
         </Button>
       </div>
-      <Button className="mt-2 btn btn-success" onClick={() => onAdd(count)}>
-        {initialValue ? 'Actualizar el Carrito' : 'Agregar al Carrito'}
+      <Button className="mt-2 btn btn-success" 
+        onClick={() => onAdd(count)}
+         >
+        <div onClick={()=>mostrarAlert()}>
+        {initialValue ? 'Actualizar Carrito' : 'Añadir al Carrito'}
+        </div>
       </Button>
+      
+      
     </div>
+    
+    
   )
 }
 

@@ -9,7 +9,7 @@ export function TextField({title, inputProps ={}, className, ...props}) {
           type="text"
           className={classNames(
             inputProps.className,
-            'border border-gray-300 '
+            'border'
           )}
         />
       </div>

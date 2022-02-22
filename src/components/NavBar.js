@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import soydeyvit from '../imagen/soydeyvit.png';
 import { NavLink, Link } from 'react-router-dom'
 import { useCart } from '../hooks/useCart'
 import { CartWidget } from './CartWidget'
@@ -12,9 +12,6 @@ const categories = [
 
 export function NavBar() {
   const cart = useCart()
-
-//   const [isMenuVisible, setIsMenuVisible] = useState(false)
-
   return(
     <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
@@ -22,6 +19,9 @@ export function NavBar() {
                      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                          <span className="navbar-toggler-icon"></span>
                     </button>
+                    <Link to='/'>
+                    <img src={soydeyvit} alt="LogoNav" width="60" className='mx-5' href=""></img>
+                    </Link>
                             <div className="collapse navbar-collapse   justify-content-end  " id="navbarNavDropdown">
                               <ul className="navbar-nav">
                                   

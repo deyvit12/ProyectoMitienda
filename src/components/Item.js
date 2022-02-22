@@ -4,7 +4,7 @@ import { classNames } from '../utils/classNames';
 
 export function ItemImage({ product }) {
   return (
-    <div className="card-img-top ">
+    <div className="py-3 px-3">
       <img
         src={product.pictureUrl}
         alt={product.title}
@@ -19,11 +19,11 @@ export function Item({ product, className }) {
     <div 
       className={classNames(
         className,
-        'card  mb-5 mt-5  text-dark bg-light  " '
+        'card   mb-5 mt-5  text-dark bg-light  '
       )}
     >
      
-      <div className="card-header    ">
+      <div className="card-header">
         <div className="  fs-5 p-3 text-decoration-none fw-bolder badge text-body">
           {product.title}
         </div>

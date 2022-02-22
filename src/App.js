@@ -5,6 +5,7 @@ import { HomePage } from './pages/Home'
 import { CartPage } from './pages/Cart'
 import { ProductDetailsPage } from './pages/ProductDetails'
 import { CategoryPage } from './pages/Category'
+import { Titulo } from './components'
 
 export default function App() {
   return (
@@ -12,9 +13,8 @@ export default function App() {
       <BrowserRouter>
         <div className="flex flex-col">
           <NavBar />
-          <div className="mt-28 pb-6 mx-auto container">
+          <div className="mt-5 py-5 container">
             <Route exact path="/">
-              <h1  className='text-center mt-5 pt-5 bg-info shadow-lg p-3 mb-5 bg-body rounded'> Deyvit Store</h1>
               <HomePage />
             </Route>
             <Route path="/p/:productId">

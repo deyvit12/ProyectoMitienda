@@ -11,8 +11,10 @@ export function Spinner({ centered, className }) {
       )}
     >
 <div class="spinner-border mt-5 mb-5" role="status">
-  <span class="visually-hidden mt-5">Loading...</span>
+  <span class="visually-hidden mt-5">Cargando...</span>
 </div>
     </div>
   )
 }
+
+
