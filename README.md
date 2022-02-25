@@ -87,9 +87,7 @@ Proyecto de Deyvit Acosta Coronado. Este proyecto se desarrollo paso a paso de l
 ```bash
 
 git clone https://github.com/deyvit12/ProyectoMitienda.git
-cd ravn-challenge-v2-ricardo-q-bazan
-cp .env.example .env
-yarn
+cd my.proyect-react
 ```
 
 ### Development
