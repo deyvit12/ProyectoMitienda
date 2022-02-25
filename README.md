@@ -8,9 +8,9 @@ Proyecto de Deyvit Acosta Coronado. Este proyecto se desarrollo paso a paso de l
 
 
   <a href="https://drive.google.com/file/d/18pLM6KLQRnu-7KjdjZwYMCnRQ-D8IT6k/view?usp=sharing">
-    <img src="https://drive.google.com/file/d/18pLM6KLQRnu-7KjdjZwYMCnRQ-D8IT6k/preview">
+    <img src="https://anthoncode.com/wp-content/uploads/2020/07/google-drive-icon.png">
   </a>
-  <p><em>Resumen De la Aplicacion</em></p>
+  <p><em>[Resumen-De-la-Aplicacion](https://drive.google.com/file/d/18pLM6KLQRnu-7KjdjZwYMCnRQ-D8IT6k/view?usp=sharing)</em></p>
 </div>
 
 ---
@@ -72,3 +72,49 @@ Proyecto de Deyvit Acosta Coronado. Este proyecto se desarrollo paso a paso de l
 ```
 
 > Other folders and files are required for tools configuration
+
+## Running
+
+### Requirements
+
+- Node.js `>=14.x`
+
+
+> You can use [nvm-sh](https://github.com/nvm-sh/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows)
+
+### Prepare
+
+```bash
+
+git clone https://github.com/deyvit12/ProyectoMitienda.git
+cd ravn-challenge-v2-ricardo-q-bazan
+cp .env.example .env
+yarn
+```
+
+### Development
+
+- To run the Next App
+
+```bash
+npm start
+
+```
+
+- To run the Storybook App
+
+```bash
+npm i Storybook
+
+```
+
+
+## Considerations
+
+- El proyecto esta comiteado desde la clase 1 hasta la ultima de manera progresiva.
+- la imagen del carrito y el logo principal estan en el proyecto, en la carpeta images, el resto estan la Base de datos de firebase.
+
+
+## License
+
+MIT © [Deyvit Acosta Coronado](https://face.pe)
