@@ -1,4 +1,4 @@
-# MI TIENDA - for DEYVTI ACOSTA
+# MI TIENDA - for DEYVIT ACOSTA
 
 ## Descripcion
 
